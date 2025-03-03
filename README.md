@@ -62,8 +62,29 @@
     docker-compose up --build
     ```
 
-3. Alternatively, use the `refresh-token.sh` script to automate the above.
+3. Alternatively, use the cross-platform refresh token script to automate the above:
 
+   * For any operating system (Windows, Linux, macOS):
+
+     ```bash
+     # Run the Python script that automatically detects your OS
+     python get_refresh_token.py
+     ```
+
+     This script will:
+     - Detect your operating system
+     - Run the appropriate script for your platform
+     - Guide you through GitHub authorization
+     - Generate a properly configured .env file
+
+   * Platform-specific scripts (if you prefer direct access):
+
+     ```bash
+     # For Linux/macOS
+     ./refresh-token.sh
+     # For Windows (in PowerShell)
+     .\refresh-token.ps1
+     ```
 ## ⚙️ Configuration
 
 The application allows you to customize behavior through environment variables or a `.env` file. Available configuration options:
