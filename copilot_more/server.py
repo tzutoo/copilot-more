@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import signal
+import sys
 from contextlib import asynccontextmanager, suppress
 from datetime import datetime, timedelta
 
@@ -79,9 +80,10 @@ async def lifespan(app: FastAPI):
                 f"({limit.behavior.value})"
             )
 
-    loop = asyncio.get_running_loop()
-    for sig in (signal.SIGTERM, signal.SIGINT):
-        loop.add_signal_handler(sig, handle_signal)
+    if sys.platform != "win32":
+        loop = asyncio.get_event_loop()
+        for sig in (signal.SIGINT, signal.SIGTERM):
+            loop.add_signal_handler(sig, handle_signal)
 
     yield
 
